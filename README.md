@@ -1,1 +1,1 @@
-# triangle-project
+The simplest seen possible: a bunch of randomly placed cones

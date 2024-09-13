@@ -1,18 +1,12 @@
 {
-  "name": "triangle-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "triangle.js",
-  "type": "module",
   "scripts": {
-    "start": "node triangle.js"
+    "dev": "vite"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "three": "^0.168.0",
-    "jsdom": "^25.0.0",
-    "canvas": "^2.11.2"
+    "orbit-controls": "^1.2.4",
+    "three": "^0.168.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.4"
   }
 }
