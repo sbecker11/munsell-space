@@ -23,8 +23,10 @@ function main() {
     scene.add(plane);
 
     // Create cones
-    const coneGeometry = new THREE.ConeGeometry(20, 100, 20);
-    coneGeometry.translate(0, 50, 0); // Mo
+    const height = 100;
+    const radius = 20;
+    const coneGeometry = new THREE.ConeGeometry(radius, height, radius);
+    coneGeometry.translate(0, height/2, 0);
     const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
     const numCones = 200;
