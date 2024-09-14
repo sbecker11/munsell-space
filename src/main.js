@@ -1,5 +1,10 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { createRolodex } from './models/rolodex.js';
+import { createCones } from './models/cones.js';
+import { BACKGROUND_COLOR } from './config.js';
+
+// export { THREE }; // Export THREE to be used in other modules
 
 function main() {
     const scene = new THREE.Scene();
@@ -8,46 +13,52 @@ function main() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    // Set the background color of the scene
+    scene.background = new THREE.Color(0x282c34); // Match the background color of the in body of index.html
+
     // Create OrbitControls
     const orbitControls = new OrbitControls(camera, renderer.domElement);
     orbitControls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
     orbitControls.dampingFactor = 0.25;
     orbitControls.screenSpacePanning = false;
-    orbitControls.maxPolarAngle = Math.PI / 2;
+    orbitControls.minPolarAngle = 0;
+    orbitControls.maxPolarAngle = Math.PI;
 
-    // Create a plane
-    const planeGeometry = new THREE.PlaneGeometry(2000, 2000);
-    const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x999999, side: THREE.DoubleSide });
-    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.rotation.x = -Math.PI / 2;
-    scene.add(plane);
+    // create a cylinder and some blocks
+    const [rolodex, boundingBox] = createRolodex();
+    scene.add(rolodex);
 
-    // Create cones
-    const height = 100;
-    const radius = 20;
-    const coneGeometry = new THREE.ConeGeometry(radius, height, radius);
-    coneGeometry.translate(0, height/2, 0);
-    const coneMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-
-    const numCones = 200;
-    for (let i = 0; i < numCones; i++) {
-        const cone = new THREE.Mesh(coneGeometry, coneMaterial);
-        cone.position.set(
-            Math.random() * 1600 - 800,
-            0,
-            Math.random() * 1600 - 800
-        );
-        scene.add(cone);
-    }
+    // create a plane and some cones
+    // const cones = createCones();
+    // for ( let cone of cones ) {
+    //     scene.add(cone);
+    // }
 
     // Set initial camera position
-    camera.position.set(0, 200, 400);
+    camera.position.set(0, 2, 0);
     camera.lookAt(0, 0, 0);
 
     // Add a light to the scene
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, 1, 1).normalize();
-    scene.add(light);
+    const dir1Color = 0xffffff;
+    const dir1Intensity = 4;
+    const dir1Light = new THREE.DirectionalLight(dir1Color, dir1Intensity);
+    dir1Light.position.set(1, 1, 1).normalize();
+    scene.add(dir1Light);
+    scene.add(dir1Light.target); // set target to the origin
+
+    // Add a light2 to the scene
+    const dir2Color = 0xffffff;
+    const dir2Intensity = 1;
+    const dir2Light = new THREE.DirectionalLight(dir2Color, dir2Intensity);
+    dir2Light.position.set(-1, -1, -1).normalize();
+    scene.add(dir2Light);
+    scene.add(dir2Light.target); // set target to the origin
+
+    // Add an ambient light to the scene
+    const ambientColor = 0xffffff; 
+    const ambientIntensity = 0.2; 
+    const ambientLight = new THREE.AmbientLight(ambientColor, ambientIntensity);
+    scene.add(ambientLight);
 
     function animate() {
         requestAnimationFrame(animate);
@@ -66,6 +77,9 @@ function main() {
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
+
+    // Clear the HTML content of the div with id="info"
+    document.getElementById('info').innerHTML = 'Triangle Project';
 }
 
 main();
