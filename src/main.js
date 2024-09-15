@@ -79,7 +79,7 @@ function main() {
     });
 
     // Clear the HTML content of the div with id="info"
-    document.getElementById('info').innerHTML = 'Triangle Project';
+    document.getElementById('info').innerHTML = 'Munsell Color Space';
 }
 
 main();
