@@ -1,18 +1,32 @@
 # munsell-space
 
   
-<a href="https://sbecker11.github.io/munsell-space/">Here's </a> my Munsell Color Chips in 3-D
+<a href="https://sbecker11.github.io/munsell-space/" target="_blank">Here's </a> my Munsell Color Space using <a href="https://threejs.org/" target="_blank">threeJS</a>    
 
 <img src="./media/munsell-rolodex-blocks-33.jpg">
 
-## See my related project <a href="https://github.com/sbecker11/workspace-munsell">workspace-munsell</a>
+## See my related project <a href="https://github.com/sbecker11/workspace-munsell" target="_blank">workspace-munsell</a>
 
-##  How to build this app
-1. install node (how ever you like)  
-2. in shell run  
-3. npm run clean  
-4. npm install  
-5. npm run build  
-3. npm run dev  
+##  Node setup (macos)  
+install node using homebrew:  
+```brew install node```  
 
-<img src="./media/munsell-rolodex-blades.gif" width="40%">
+or install node using curl: 
+```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```  
+
+verify node installation:  
+```
+node -v
+npm -v
+```   
+
+## Building and running the Node app locally
+run thr following npm (node package manager) commands in your project's root directory.  
+```
+npm run clean
+npm install
+npm run build
+npm run dev
+```
+
+
